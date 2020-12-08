@@ -1,6 +1,6 @@
 import {STATUS, TYPE} from "./constants";
 import {Attribute} from "./ReporterOptions";
-import {parseTags} from "./utils";
+import {parseAttributes, parseTags, clearName} from "./utils";
 
 export class StartTestItem {
   public name = "";
@@ -24,8 +24,19 @@ export class StartTestItem {
     const tags = parseTags(this.name);
     if (tags.length > 0) {
       const attrs = tags.map((value) => (new Attribute(undefined, value)));
-      this.attributes.push(...attrs);
+      this.attributes.push(...tags);
     }
+  }
+
+  public addAttributes() {
+    const attributes = parseAttributes(this.name);
+    if (attributes.length > 0) {
+      this.attributes.push(...attributes);
+    }
+  }
+
+  public removeAttributesFromName() {
+    this.name = clearName(this.name);
   }
 
   public addSauseLabId(id: string) {

@@ -1,7 +1,8 @@
 // @ts-ignore
 import logger from "@wdio/logger";
 import validator from "validator";
-import {StartTestItem} from "./entities";
+import { StartTestItem } from "./entities";
+import { Attribute } from "./ReporterOptions";
 const stringify = require("json-stringify-safe");
 
 const OBJLENGTH = 10;
@@ -9,6 +10,8 @@ const ARRLENGTH = 10;
 const STRINGLIMIT = 1000;
 const STRINGTRUNCATE = 200;
 const TAGS_PATTERN = /\B@[a-z0-9_-]+/gi;
+const ATTR_PATTERN = /\B@[a-z0-9_-_:]+/gi;
+
 const log = logger("wdio-reportportal-reporter");
 
 export const promiseErrorHandler = (promise: Promise<any>) => {
@@ -71,7 +74,7 @@ export const limit = (val: any) => {
 
 export const addBrowserParam = (browser: string, testItem: StartTestItem) => {
   if (browser) {
-    const param = {key: "browser", value: browser};
+    const param = { key: "browser", value: browser };
     if (Array.isArray(testItem.parameters)) {
       testItem.parameters.push(param);
       return;
@@ -87,6 +90,29 @@ export const addDescription = (description: string, testItem: StartTestItem) => 
 };
 
 export const parseTags = (text: string): string[] => ("" + text).match(TAGS_PATTERN) || [];
+
+export const parseAttributes = (text: string): Attribute[] => {
+  const tags = ("" + text).match(ATTR_PATTERN) || [];
+  const attributes = tags.map(t => {
+    const parsedTag = t.split(':');
+    const name = parsedTag[0].replace('@', '');
+    const value = parsedTag[1].replace('@', '');
+
+    return new Attribute(name, value);
+  });
+
+  return attributes;
+}
+
+export const clearName = (text: string): string => {
+  let result = text;
+  const attributesStartIndex = result.indexOf('[');
+  const attributesEndIndex = result.indexOf(']') + 1;
+  const attributes = result.substring(attributesStartIndex, attributesEndIndex);
+  result = result.replace(attributes, '');
+
+  return result.trim();
+}
 
 export const isScreenshotCommand = (command: any) => {
   const isScrenshotEndpoint = /\/session\/[^/]*\/screenshot/;

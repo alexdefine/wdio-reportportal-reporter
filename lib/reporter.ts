@@ -98,7 +98,8 @@ class ReportPortalReporter extends Reporter {
       parentId = suiteItem.id;
     }
     if (this.options.parseTagsFromTestTitle) {
-      suiteStartObj.addTags();
+      suiteStartObj.addAttributes();
+      suiteStartObj.removeAttributesFromName();
     }
     suiteStartObj.description = this.sanitizedCapabilities;
     const {tempId, promise} = this.client.startTestItem(
@@ -147,7 +148,8 @@ class ReportPortalReporter extends Reporter {
       testStartObj.hasStats = false;
     }
     if (this.options.parseTagsFromTestTitle) {
-      testStartObj.addTags();
+      testStartObj.addAttributes();
+      testStartObj.removeAttributesFromName();
     }
     if (this.options.isSauseLabRun) {
       testStartObj.addSauseLabId(this.sessionId);
