@@ -1,7 +1,7 @@
 {
-  "name": "wdio-reportportal-reporter",
-  "version": "6.1.2",
-  "description": "A WebdriverIO v6 plugin. Report results to Report Portal.",
+  "name": "wdio-reportportal-reporter-extended",
+  "version": "1.0.3",
+  "description": "A WebdriverIO v6 plugin. Report results to Report Portal. Originally created by Boris Osipov. Extends original functionality with custom.",
   "main": "build/reporter.js",
   "scripts": {
     "build": "run-s clean compile",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/borisosipov/wdio-reportportal-reporter.git"
+    "url": "git+https://github.com/alexdefine/wdio-reportportal-reporter-extended.git"
   },
   "directories": {
     "lib": "./lib"
@@ -26,12 +26,7 @@
     "wdio-reporter",
     "reportportal"
   ],
-  "author": "Boris Osipov <osipov.boris@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/borisosipov/wdio-reportportal-reporter/issues"
-  },
-  "homepage": "https://github.com/borisosipov/wdio-reportportal-reporter#readme",
   "dependencies": {
     "json-stringify-safe": "~5.0.1",
     "validator": "^13.1.17",
@@ -50,9 +45,6 @@
     "tslint": "^6.1.3",
     "typescript": "^3.9.4"
   },
-  "contributors": [
-    "Boris Osipov <osipov.boris@gmail.com>"
-  ],
   "jest": {
     "moduleFileExtensions": [
       "ts",
@@ -64,5 +56,10 @@
       "\\.(ts|tsx)$": "ts-jest"
     },
     "testRegex": "/__tests__/.*\\.spec.(ts)$"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/alexdefine/wdio-reportportal-reporter-extended/issues"
+  },
+  "homepage": "https://github.com/alexdefine/wdio-reportportal-reporter-extended#readme",
+  "author": ""
 }
