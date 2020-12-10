@@ -1,6 +1,6 @@
 {
   "name": "wdio-reportportal-reporter-extended",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A WebdriverIO v6 plugin. Report results to Report Portal. Originally created by Boris Osipov. Extends original functionality with custom.",
   "main": "build/reporter.js",
   "scripts": {

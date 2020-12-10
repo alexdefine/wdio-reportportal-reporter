@@ -185,12 +185,14 @@ class ReportPortalReporter extends Reporter {
   }
 
   onTestSkip(test) {
-    log.trace(`Skip test ${test.title} ${test.uid}`);
-    const testItem = this.storage.getCurrentTest();
-    if (testItem === null) {
-      this.onTestStart(test);
-    }
-    this.testFinished(test, STATUS.SKIPPED, new Issue("NOT_ISSUE"));
+     if (!this.options.ignoreSkippedTests) {
+            log.trace(`Skip test ${test.title} ${test.uid}`);
+            const testItem = this.storage.getCurrentTest();
+            if (testItem === null) {
+                this.onTestStart(test);
+            }
+            this.testFinished(test, STATUS.SKIPPED, new Issue("NOT_ISSUE"));
+        }
   }
 
   testFinished(test: any, status: STATUS, issue ?: Issue) {
